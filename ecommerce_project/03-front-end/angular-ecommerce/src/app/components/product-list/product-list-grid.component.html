@@ -11,9 +11,15 @@
 
                     <div class="product-box">
 
-                        <img src="{{tempProduct.imageUrl}}" class="img-responsive">
-                        <h5>{{tempProduct.name}}</h5>
-                            <hr>
+                        <a routerLink="/products/{{tempProduct.id}}">
+                            <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                        </a>
+
+                        <br>
+                        <a routerLink="/products/{{tempProduct.id}}">
+                            <h1>{{tempProduct.name}}</h1>
+                        </a>
+
                         <div class="price">R{{tempProduct.unitPrice}}</div>
                         <a href="#" class="primary-btn">Add to cart</a>
 

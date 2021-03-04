@@ -107,7 +107,8 @@ a,a:hover{
 .page-wrapper{
     overflow:hidden;
     background:#e5e5e5;
-    padding-bottom:8vh
+    padding-bottom:8vh;
+    height:100vh;/*test height - change if necessary*/
 }
 
 .page-container{
@@ -559,6 +560,13 @@ input.au-input.au-input-xl{
     color:#585858
 }
 
+
+.product-box a:hover{
+    text-decoration:none;
+    transform: scale(1.05);
+
+}
+
 /* 
  * ----------------------------
  * Shopping Cart Checkout
@@ -722,6 +730,11 @@ table.table.table-bordered th{
 .detail-section{
     margin-top:60px
 }
+
+.detail-img{
+    width: 30%;
+}
+
 /**/
 
 /* 
