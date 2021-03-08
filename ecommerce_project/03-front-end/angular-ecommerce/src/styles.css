@@ -108,7 +108,6 @@ a,a:hover{
     overflow:hidden;
     background:#e5e5e5;
     padding-bottom:8vh;
-    height:100vh;/*test height - change if necessary*/
 }
 
 .page-container{
@@ -566,6 +565,12 @@ input.au-input.au-input-xl{
     transform: scale(1.05);
 
 }
+
+/* .footer-pagination{
+    position:absolute;
+    left: 50%;
+    transform: translate(-50%);
+} */
 
 /* 
  * ----------------------------
@@ -1048,3 +1053,5 @@ footer ul li{
         padding:8px 0
     }
 }
+
+
