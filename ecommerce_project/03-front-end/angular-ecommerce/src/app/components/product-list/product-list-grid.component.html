@@ -20,8 +20,8 @@
                             <h1>{{tempProduct.name}}</h1>
                         </a>
 
-                        <div class="price">R{{tempProduct.unitPrice}}</div>
-                        <a href="#" class="primary-btn">Add to cart</a>
+                        <div class="price">R{{(tempProduct.unitPrice * 7).toFixed(2)}}</div>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
 
                     </div>
 

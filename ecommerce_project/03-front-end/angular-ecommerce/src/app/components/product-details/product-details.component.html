@@ -5,9 +5,9 @@
        <img src="{{product.imageUrl}}" class="detail-img">
 
         <h3>{{product.name}}</h3>
-        <div class="price">{{product.unitPrice}}</div>
+        <div class="price">R{{(product.unitPrice * 7).toFixed(2)}}</div>
 
-        <a href="#" class="primary-btn">Add to cart</a>
+        <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
 
         <hr>
 
