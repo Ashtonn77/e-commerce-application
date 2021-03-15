@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GothamNetworkFormService } from 'src/app/services/gotham-network-form.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,10 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardMonths : number[] = [];
+  creditCardYears : number[] = [];
+
+  constructor(private formBuilder: FormBuilder, private gothamNetworkFormService: GothamNetworkFormService) { }
 
   ngOnInit(): void {
 
@@ -59,6 +63,24 @@ export class CheckoutComponent implements OnInit {
       })
 
     });
+
+    const startMonth : number = new Date().getMonth() + 1;
+    console.log("Start month: " + startMonth);
+
+    this.gothamNetworkFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    )
+    
+    this.gothamNetworkFormService.getCreditCardYears().subscribe(
+      data => {
+        console.log("Retrieving credit card years: " + JSON.stringify(data));
+        this.creditCardYears = data;
+      }
+    )
+
   }
 
   copyShippingAddressToBillingAddress(event){
@@ -76,4 +98,34 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutFormGroup.get('customer').value);
   }
 
+  handleMonthsAndYears(){
+
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear : number = new Date().getFullYear();
+    const selectedYear : number = Number(creditCardFormGroup.value.expirationYear);
+
+
+    let startMonth : number;
+
+    if (currentYear == selectedYear) {
+
+      startMonth = new Date().getMonth() + 1;
+
+    } else {
+
+      startMonth = 1; 
+
+    }
+
+    this.gothamNetworkFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieving credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    )
+
+  }
+
 }
+
