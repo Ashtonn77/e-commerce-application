@@ -66,9 +66,11 @@
                         <div class="col-md-9">
 
                             <div class="input-space">
-                                <select formControlName="country" style="border-radius: 5px;">
+                                <select formControlName="country" style="border-radius: 5px;" (change)="getStates('shippingAddress')">
 
-                                    <option>TODO</option>
+                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                        {{country.name}}
+                                    </option>
 
                                 </select>
                             </div>
@@ -111,7 +113,11 @@
                             <div class="input-space">
                                 <select formControlName="state" style="border-radius: 5px;">
 
-                                    <option>TODO</option>
+                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">
+
+                                        {{state.name}}
+
+                                    </option>
 
                                 </select>
                             </div>
@@ -159,9 +165,11 @@
                         <div class="col-md-9">
 
                             <div class="input-space">
-                                <select formControlName="country" style="border-radius: 5px;">
+                                <select formControlName="country" style="border-radius: 5px;" (change)="getStates('billingAddress')">
 
-                                    <option>TODO</option>
+                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                        {{country.name}}
+                                    </option>
 
                                 </select>
                             </div>
@@ -204,7 +212,11 @@
                             <div class="input-space">
                                 <select formControlName="state" style="border-radius: 5px;">
 
-                                    <option>TODO</option>
+                                    <option *ngFor="let state of billingAddressStates" [ngValue]="state">
+
+                                        {{state.name}}
+
+                                    </option>
 
                                 </select>
                             </div>
@@ -279,7 +291,7 @@
 
                     </div>
 
-                    
+
                     <div class="row">
 
                         <div class="col-md-3"><label>Security Code</label></div>
@@ -318,7 +330,8 @@
                         <div class="col-md-9">
 
                             <div class="input-space">
-                                <select formControlName="expirationYear" style="border-radius: 5px;" (change)="handleMonthsAndYears()">
+                                <select formControlName="expirationYear" style="border-radius: 5px;"
+                                    (change)="handleMonthsAndYears()">
 
                                     <option *ngFor="let year of creditCardYears">
                                         {{year}}
@@ -330,7 +343,7 @@
                         </div>
 
                     </div>
-                  
+
 
                 </div>
 
