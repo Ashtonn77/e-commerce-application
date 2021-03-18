@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
+import { CartService } from 'src/app/services/cart.service';
 import { GothamNetworkFormService } from 'src/app/services/gotham-network-form.service';
 import { GothamShoppingValidators } from 'src/app/validators/gotham-shopping-validators';
 
@@ -25,9 +26,13 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
-  constructor(private formBuilder: FormBuilder, private gothamNetworkFormService: GothamNetworkFormService) { }
+  constructor(private formBuilder: FormBuilder, 
+              private gothamNetworkFormService: GothamNetworkFormService,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails();
 
     this.checkoutFormGroup = this.formBuilder.group({
 
@@ -96,6 +101,17 @@ export class CheckoutComponent implements OnInit {
         this.countries = data;
 
       }
+    )
+
+  }
+  reviewCartDetails() {
+    
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    )
+
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
     )
 
   }
