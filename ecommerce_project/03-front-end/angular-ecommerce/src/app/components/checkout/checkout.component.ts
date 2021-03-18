@@ -17,8 +17,8 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  creditCardMonths : number[] = [];
-  creditCardYears : number[] = [];
+  creditCardMonths: number[] = [];
+  creditCardYears: number[] = [];
 
   countries: Country[] = [];
 
@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit {
     this.checkoutFormGroup = this.formBuilder.group({
 
       customer: this.formBuilder.group({
-        
+
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
         email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
@@ -41,30 +41,30 @@ export class CheckoutComponent implements OnInit {
 
       shippingAddress: this.formBuilder.group({
 
-        street: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-        zipCode: ['']
+        street: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace])
 
       }),
 
       billingAddress: this.formBuilder.group({
 
-        street: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-        zipCode: ['']
+        street: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace])
 
       }),
 
       creditCard: this.formBuilder.group({
 
-        cardType: [''],
-        nameOnCard: [''],
-        cardNumber: [''],
-        securityCode: [''],
+        cardType: new FormControl('', [Validators.required]),
+        nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2), GothamShoppingValidators.notOnlyWhitespace]),
+        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
         expirationMonth: [''],
         expirationYear: ['']
 
@@ -72,7 +72,7 @@ export class CheckoutComponent implements OnInit {
 
     });
 
-    const startMonth : number = new Date().getMonth() + 1;
+    const startMonth: number = new Date().getMonth() + 1;
     console.log("Start month: " + startMonth);
 
     this.gothamNetworkFormService.getCreditCardMonths(startMonth).subscribe(
@@ -81,7 +81,7 @@ export class CheckoutComponent implements OnInit {
         this.creditCardMonths = data;
       }
     )
-    
+
     this.gothamNetworkFormService.getCreditCardYears().subscribe(
       data => {
         console.log("Retrieving credit card years: " + JSON.stringify(data));
@@ -91,35 +91,52 @@ export class CheckoutComponent implements OnInit {
 
     this.gothamNetworkFormService.getCountries().subscribe(
       data => {
-        
+
         console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
-        
+
       }
     )
 
   }
 
-  get firstName(){ return this.checkoutFormGroup.get('customer.firstName');  }
-  get lastName(){ return this.checkoutFormGroup.get('customer.lastName');  }
-  get email(){ return this.checkoutFormGroup.get('customer.email');  }
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  get email() { return this.checkoutFormGroup.get('customer.email'); }
 
-  copyShippingAddressToBillingAddress(event){
-    if(event.target.checked){
+  get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
+  get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
+  get shippingAddressState() { return this.checkoutFormGroup.get('shippingAddress.state'); }
+  get shippingAddressCountry() { return this.checkoutFormGroup.get('shippingAddress.country'); }
+  get shippingAddressZipCode() { return this.checkoutFormGroup.get('shippingAddress.zipCode'); }
+
+  get billingAddressStreet() { return this.checkoutFormGroup.get('billingAddress.street'); }
+  get billingAddressCity() { return this.checkoutFormGroup.get('billingAddress.city'); }
+  get billingAddressState() { return this.checkoutFormGroup.get('billingAddress.state'); }
+  get billingAddressCountry() { return this.checkoutFormGroup.get('billingAddress.country'); }
+  get billingAddressZipCode() { return this.checkoutFormGroup.get('billingAddress.zipCode'); }
+
+  get creditCardType() { return this.checkoutFormGroup.get('creditCard.cardType'); }
+  get creditCardNameOnCard() { return this.checkoutFormGroup.get('creditCard.nameOnCard'); }
+  get creditCardNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
+  get creditCardSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
+
+  copyShippingAddressToBillingAddress(event) {
+    if (event.target.checked) {
       this.checkoutFormGroup.controls.billingAddress.setValue(this.checkoutFormGroup.controls.shippingAddress.value);
-      this.billingAddressStates = this.shippingAddressStates; 
+      this.billingAddressStates = this.shippingAddressStates;
     }
-    else{
+    else {
       this.checkoutFormGroup.controls.billingAddress.reset();
     }
   }
 
 
-  onSubmit(){
+  onSubmit() {
     console.log("Handling the submit button");
 
 
-    if(this.checkoutFormGroup.invalid){
+    if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched;
     }
 
@@ -129,15 +146,15 @@ export class CheckoutComponent implements OnInit {
     console.log("The shipping address state is " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
   }
 
-  handleMonthsAndYears(){
+  handleMonthsAndYears() {
 
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
 
-    const currentYear : number = new Date().getFullYear();
-    const selectedYear : number = Number(creditCardFormGroup.value.expirationYear);
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup.value.expirationYear);
 
 
-    let startMonth : number;
+    let startMonth: number;
 
     if (currentYear == selectedYear) {
 
@@ -145,7 +162,7 @@ export class CheckoutComponent implements OnInit {
 
     } else {
 
-      startMonth = 1; 
+      startMonth = 1;
 
     }
 
@@ -158,7 +175,7 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  getStates(formGroupName: string){
+  getStates(formGroupName: string) {
 
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
@@ -171,7 +188,7 @@ export class CheckoutComponent implements OnInit {
     this.gothamNetworkFormService.getStates(countryCode).subscribe(
       data => {
 
-        if(formGroupName == 'shippingAddress'){
+        if (formGroupName == 'shippingAddress') {
           this.shippingAddressStates = data;
         } else {
           this.billingAddressStates = data;
