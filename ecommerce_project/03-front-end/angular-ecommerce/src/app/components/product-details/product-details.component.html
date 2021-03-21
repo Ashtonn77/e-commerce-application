@@ -2,19 +2,26 @@
 
     <div class="container-fluid">
 
-       <img src="{{product.imageUrl}}" class="detail-img">
+       <img src="{{product.imageUrl}}" class="detail-img" style="padding: 30px;">
 
         <h3>{{product.name}}</h3>
         <div class="price">R{{(product.unitPrice).toFixed(2)}}</div>
 
-        <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
+        <button (click)="addToCart()" class="btn btn-primary btn-sm" 
+        style="background-color: #4279a3; color: #fff; box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.8); padding: 5px 12px 5px 12px;" 
+        onmouseover="this.style.backgroundColor='#3385c6';" 
+        onmouseout="this.style.backgroundColor='#4279a3';"
+        onmousedown="this.style.backgroundColor='#7f8e9e';"
+        onmouseup="this.style.backgroundColor='#3385c6';">
+        Add to cart
+    </button>
 
         <hr>
 
         <h4>Description</h4>
         <p>{{product.description}}</p>
 
-        <a routerLink="/products">Back to products</a>
+        <a style="color: #4279a3;" routerLink="/products">Back to products</a>
 
     </div>
 

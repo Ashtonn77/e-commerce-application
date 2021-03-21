@@ -12,16 +12,23 @@
                     <div class="product-box">
 
                         <a routerLink="/products/{{tempProduct.id}}">
-                            <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                            <img src="{{tempProduct.imageUrl}}" class="img-responsive" style="max-height: 200px;">
                         </a>
 
                         <br>
                         <a routerLink="/products/{{tempProduct.id}}">
-                            <h1>{{tempProduct.name}}</h1>
+                            <h1 style="color: rgb(49, 47, 47);">{{tempProduct.name}}</h1>
                         </a>
 
                         <div class="price">R{{(tempProduct.unitPrice).toFixed(2)}}</div>
-                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-sm" 
+                        style="background-color: #4279a3; color: #fff; box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.8); padding: 5px 12px 5px 12px;" 
+                        onmouseover="this.style.backgroundColor='#3385c6';" 
+                        onmouseout="this.style.backgroundColor='#4279a3';"
+                        onmousedown="this.style.backgroundColor='#7f8e9e';"
+                        onmouseup="this.style.backgroundColor='#3385c6';">
+                        Add to cart
+                        </button>
 
                     </div>
 
