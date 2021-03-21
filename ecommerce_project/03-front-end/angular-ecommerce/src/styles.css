@@ -586,7 +586,7 @@ input.au-input.au-input-xl{
     position:absolute;
     top:-26px;
     left:13px;
-    background:#fff;
+    background:rgb(250, 250, 250);
     padding:10px 20px;
     font-weight:500;
     z-index:23;
