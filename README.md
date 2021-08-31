@@ -1,5 +1,5 @@
-# Welcome to The Gotham Shopping Network...
-Hero or Villain, Bat suit or Clown suit, Face paints or Face masks. We got what you need.
+# Welcome to The Gotham Shopping Network
+Hero or Villain, Bat suit or Clown suit, Face paints or Face masks. We got what you need.<br/>
 Fully functional e-commerce application.
 
 ### Technologies used: 
