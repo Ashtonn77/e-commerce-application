@@ -1,7 +1,6 @@
-# E-Commerce Application
-
-## Welcome to The Gotham Shopping Network...
+# Welcome to The Gotham Shopping Network...
 Hero or Villain, Bat suit or Clown suit, Face paints or Face masks. We got what you need.
+Fully functional e-commerce application.
 
 ### Technologies used: 
 1. Java 
